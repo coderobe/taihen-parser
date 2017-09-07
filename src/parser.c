@@ -154,6 +154,7 @@ int taihen_config_validate(const char *input)
     {
         switch (ctx.token)
         {
+        case CONFIG_ARG_TOKEN:
         case CONFIG_SECTION_NAME_TOKEN:
             // ensure we actually have a string
             if (strlen(ctx.line_pos) == 0)
