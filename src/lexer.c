@@ -169,6 +169,8 @@ static int lex_line(taihen_config_lexer *ctx)
 
     if (*ctx->line_pos == TOKEN_ARG_START)
     {
+        ctx->line_pos++;
+        ctx->line_pos = skip_whitespace(ctx->line_pos);
         ctx->token = CONFIG_ARG_TOKEN;
     }
     else
@@ -257,6 +259,7 @@ int taihen_config_lex(taihen_config_lexer *ctx)
     case CONFIG_START_TOKEN:
     case CONFIG_COMMENT_TOKEN:
     case CONFIG_PATH_TOKEN:
+    case CONFIG_ARG_TOKEN:
     case CONFIG_SECTION_NAME_TOKEN:
         return lex_line(ctx);
 
