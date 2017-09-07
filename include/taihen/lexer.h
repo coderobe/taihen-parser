@@ -15,7 +15,8 @@ typedef enum
     CONFIG_SECTION_TOKEN,
     CONFIG_SECTION_HALT_TOKEN,
     CONFIG_SECTION_NAME_TOKEN,
-    CONFIG_PATH_TOKEN
+    CONFIG_PATH_TOKEN,
+    CONFIG_ARG_TOKEN
 } taihen_config_lexer_token;
 
 typedef struct

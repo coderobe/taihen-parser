@@ -20,6 +20,7 @@ static const char TOKEN_EMPTY = '\0';
 static const char TOKEN_COMMENT_START = '#';
 static const char TOKEN_SECTION_START = '*';
 static const char TOKEN_HALT = '!';
+static const char TOKEN_ARG_START = '>';
 
 #ifdef NO_CTYPE
 static int isspace(int c)
@@ -164,6 +165,11 @@ static int lex_line(taihen_config_lexer *ctx)
     if (*ctx->line_pos == TOKEN_SECTION_START)
     {
         ctx->token = CONFIG_SECTION_TOKEN;
+    }
+
+    if (*ctx->line_pos == TOKEN_ARG_START)
+    {
+        ctx->token = CONFIG_ARG_TOKEN;
     }
     else
     {
