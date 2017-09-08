@@ -268,13 +268,7 @@ void taihen_config_parse(const char *input, const char *section, taihen_config_h
         case CONFIG_PATH_TOKEN:
             if (record_entries)
             {
-                //TODO: call modified handler with all CONFIG_ARG_TOKENs
-                if (current_path != NULL)
-                {
-                    handler(current_path, param);
-                }
-
-                current_path = ctx.line_pos;
+                handler(TAIHEN_CONFIG_DATA_PATH, ctx.line_pos, param);
             }
 
             break;
@@ -282,17 +276,14 @@ void taihen_config_parse(const char *input, const char *section, taihen_config_h
         case CONFIG_ARG_TOKEN:
             if(record_entries)
             {
-                //TODO: store ctx.line_pos somewhere
+                handler(TAIHEN_CONFIG_DATA_ARG, ctx.line_pos, param);
             }
 
             break;
 
         case CONFIG_END_TOKEN:
-            //TODO: call modified handler with all CONFIG_ARG_TOKENs
-            if (current_path != NULL){
-                handler(current_path, param);
-                current_path = NULL;
-            }
+            handler(TAIHEN_CONFIG_DATA_END, NULL, param);
+            
             break;
 
         default:

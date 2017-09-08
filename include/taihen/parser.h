@@ -5,8 +5,13 @@
 extern "C" {
 #endif
 
-//TODO: update callback signature
-typedef void (* taihen_config_handler)(const char *module, void *param);
+enum taihen_config_handler_type {
+    TAIHEN_CONFIG_DATA_PATH,
+    TAIHEN_CONFIG_DATA_ARG,
+    TAIHEN_CONFIG_DATA_END
+};
+
+typedef void (* taihen_config_handler)(enum taihen_config_handler_type type, const char *data, void *param);
 
 int taihen_config_validate(const char *input);
 void taihen_config_parse(const char *input, const char *section, taihen_config_handler handler, void *param);
