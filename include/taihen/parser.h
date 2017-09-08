@@ -5,6 +5,7 @@
 extern "C" {
 #endif
 
+//TODO: update callback signature
 typedef void (* taihen_config_handler)(const char *module, void *param);
 
 int taihen_config_validate(const char *input);

@@ -230,6 +230,7 @@ void taihen_config_parse(const char *input, const char *section, taihen_config_h
 
     int halt_flag = 0;
     int record_entries = 0;
+    char* current_path = NULL;
 
     while (taihen_config_lex(&ctx) > 0)
     {
@@ -267,9 +268,31 @@ void taihen_config_parse(const char *input, const char *section, taihen_config_h
         case CONFIG_PATH_TOKEN:
             if (record_entries)
             {
-                handler(ctx.line_pos, param);
+                //TODO: call modified handler with all CONFIG_ARG_TOKENs
+                if (current_path != NULL)
+                {
+                    handler(current_path, param);
+                }
+
+                current_path = ctx.line_pos;
             }
 
+            break;
+
+        case CONFIG_ARG_TOKEN:
+            if(record_entries)
+            {
+                //TODO: store ctx.line_pos somewhere
+            }
+
+            break;
+
+        case CONFIG_END_TOKEN:
+            //TODO: call modified handler with all CONFIG_ARG_TOKENs
+            if (current_path != NULL){
+                handler(current_path, param);
+                current_path = NULL;
+            }
             break;
 
         default:
